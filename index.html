@@ -1,0 +1,1211 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EcoGrow — Huerto hidropónico inteligente para casa</title>
+  <meta name="description" content="EcoGrow es el huerto hidropónico de interior que se cuida solo gracias a la IA. Luz, agua y nutrientes automatizados para que tú solo tengas que cosechar." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050f0d;
+      --bg-alt: #071713;
+      --ink: #f4faf7;
+      --muted: #9fb7ae;
+      --accent: #1b4940;
+      --accent-strong: #4ad8c3;
+      --cta: #40d3f5;
+      --cta-hover: #31b3d0;
+      --border-subtle: rgba(178, 232, 222, 0.16);
+      --shadow-soft: 0 20px 70px rgba(0, 0, 0, 0.8);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+      --transition-fast: 160ms ease-out;
+      --max-width: 1040px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background-image:
+radial-gradient(
+  circle at top left,
+  rgba(5, 15, 13, 0.35),
+  rgba(5, 20, 18, 0.55) 40%,
+  rgba(5, 15, 13, 0.45)
+),
+
+        url('img/foglia.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 20px 20px 80px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0 18px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      position: sticky; 
+      width: 47px;
+      height: 47px;
+      border-radius: 42px;
+      background: radial-gradient(circle at 30% 20%, #1b4940, #0a2321);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.9);
+      z-index: 999;
+    }
+
+    .logo-leaf {
+      width: 19px;
+      height: 19px;
+      border-radius: 999px;
+      border: 2px solid #40d3f5;
+      border-left-width: 3px;
+      transform: rotate(-25deg);
+    }
+
+    .logo-text {
+      font-weight: 9000;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 1.7rem;
+      color: var(--ink);
+    }
+
+    .pill {
+      font-size: 0.78rem;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      background: rgba(23, 71, 64, 0.8);
+      color: var(--muted);
+      border: 1px solid rgba(122, 210, 195, 0.5);
+    }
+
+    main {
+      flex: 1;
+    }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 40px;
+      align-items: center;
+      padding: 40px 0 32px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px 4px 4px;
+      border-radius: var(--radius-pill);
+      background: rgba(14, 37, 31, 0.96);
+      border: 1px solid rgba(80, 175, 161, 0.45);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      margin-bottom: 16px;
+    }
+
+    .hero-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: conic-gradient(from 220deg, #40d3f5, #4ad8c3, #144633, #40d3f5);
+      padding: 3px;
+    }
+
+    .hero-dot-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      background: #050f0d;
+    }
+
+    .hero-eyebrow span {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .hero-title {
+      font-size: clamp(2.35rem, 5vw, 3.1rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(120deg, #40d3f5, #4ad8c3);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--muted);
+      max-width: 460px;
+      margin-bottom: 22px;
+    }
+
+    .hero-problem-small {
+  font-size: 1.9rem;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 1300px;
+  margin-bottom: 40px;
+}
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: var(--radius-pill);
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: 1px solid transparent;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: radial-gradient(circle at 20% 0, #bdf1ff, #40d3f5);
+      color: #021216;
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.9);
+    }
+
+    .btn-primary:hover {
+      background: radial-gradient(circle at 20% 0, #d1f4ff, #31b3d0);
+      transform: translateY(-1px);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 1);
+    }
+
+    .btn-ghost {
+      background: rgba(4, 20, 19, 0.9);
+      color: var(--muted);
+      border-color: rgba(98, 183, 174, 0.4);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(8, 35, 32, 0.95);
+      color: #e7fdf9;
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.9);
+      transform: translateY(-1px);
+    }
+
+    .hero-hint {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .hero-visual-wrap {
+      position: relative;
+    }
+
+    .hero-card {
+      position: relative;
+      border-radius: var(--radius-xl);
+      background: radial-gradient(circle at top left, #071713 0, #04100d 55%, #010604 100%);
+      padding: 20px 20px 24px;
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      border: 1px solid rgba(112, 215, 199, 0.3);
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 0.75rem;
+      background: rgba(6, 41, 34, 0.85);
+      color: var(--muted);
+      margin-bottom: 10px;
+      border: 1px solid rgba(74, 216, 195, 0.4);
+    }
+
+    .device-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;     /* riempie senza deformare */
+      border-radius: 22px;   /* stessa curvatura del device */
+      z-index: 1;
+    }
+
+    .hero-device {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      aspect-ratio: 4 / 3;           /* ← questa è la magia */
+      border-radius: 22px;
+      border: 1px solid rgba(106, 218, 202, 0.7);
+      box-shadow: 0 22px 50px rgba(0, 0, 0, 1);
+      background: radial-gradient(circle at 20% 0%, #041e1a, #08342f 45%, #041716 100%);
+    }
+
+    .device-pot {
+      width: 120px;
+      height: 120px;
+      border-radius: 32px;
+      background: linear-gradient(150deg, #0b1f1b, #14352e);
+      box-shadow: 0 22px 50px rgba(0, 0, 0, 1);
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .device-pot-inner {
+      width: 82%;
+      height: 60%;
+      border-radius: 26px 26px 30px 30px;
+      background: linear-gradient(180deg, #0b2220, #050f0d);
+      border-top: 1px solid rgba(138, 255, 229, 0.5);
+      border-bottom: 1px solid rgba(2, 7, 7, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .device-water {
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 35%;
+      background: linear-gradient(180deg, #40d3f5, #1f7f9a);
+      box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.9) inset;
+    }
+
+    .device-plant {
+      position: absolute;
+      top: -32%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+      height: 70px;
+    }
+
+    .leaf {
+      width: 26px;
+      height: 46px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 20% 0%, #c9ffe8, #1da370);
+      position: absolute;
+    }
+
+    .leaf.l1 {
+      left: 0;
+      bottom: 0;
+      transform: rotate(-22deg);
+    }
+
+    .leaf.l2 {
+      right: 0;
+      bottom: -4px;
+      transform: rotate(18deg);
+    }
+
+    .leaf.l3 {
+      left: 50%;
+      transform: translateX(-50%) rotate(2deg);
+      bottom: 8px;
+      height: 54px;
+    }
+
+    .device-light {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% -10%, rgba(102, 255, 255, 0.7), transparent 55%);
+      mix-blend-mode: screen;
+      opacity: 0.9;
+    }
+
+    .hero-badge-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      margin-top: 14px;
+      color: var(--muted);
+      gap: 8px;
+    }
+
+    .badge-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .mini-pill {
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(5, 21, 19, 0.9);
+      border: 1px solid rgba(122, 210, 195, 0.4);
+    }
+
+    /* Sections */
+    section {
+      padding: 28px 0;
+    }
+
+    .section-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: 1.35rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      color: var(--ink);
+    }
+
+    .section-sub {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 18px;
+    }
+
+    .social-proof {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    .social-highlight {
+      font-weight: 600;
+      color: #f4faf7;
+    }
+
+    .quote {
+      padding-left: 10px;
+      border-left: 2px solid rgba(94, 216, 199, 0.45);
+      font-size: 0.85rem;
+      max-width: 360px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--bg-alt);
+      border-radius: var(--radius-lg);
+      padding: 16px 16px 18px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.8);
+    }
+
+    .card h3 {
+      font-size: 0.98rem;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      font-size: 0.86rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .card-img {
+  width: 100%;
+  height: 220px;
+  border-radius: 14px;
+  object-fit: cover;
+  margin-top: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  border: 1px solid rgba(122,210,195,0.25);
+}
+
+@media (max-width: 720px) {
+  .card-img {
+    height: 180px;
+  }
+}
+
+.pain-block {
+  text-align: center;
+  margin: 0 auto 40px;
+  padding: 10px 0;
+  max-width: 720px;
+}
+
+.pain-block p {
+  font-size: 1.5rem;            /* abbastanza grande da colpire */
+  line-height: 1.4;
+  color: var(--ink);             /* bianco elegante */
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* span con lo stesso gradient dell'hero */
+.pain-block .pain-highlight {
+  background: linear-gradient(120deg, #40d3f5, #4ad8c3);
+  -webkit-background-clip: text;
+  color: transparent;
+  font-weight: 700;
+}
+
+@media (max-width: 720px) {
+  .pain-block p {
+    font-size: 1.25rem;
+  }
+}
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .step {
+      border-radius: var(--radius-lg);
+      padding: 14px 14px 16px;
+      background: rgba(9, 29, 26, 0.96);
+      border: 1px solid rgba(95, 197, 180, 0.45);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.9);
+    }
+
+    .step-index {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(122, 210, 195, 0.7);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      margin-bottom: 6px;
+      color: var(--accent-strong);
+    }
+
+    .step h3 {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+
+    .step p {
+      font-size: 0.83rem;
+      color: var(--muted);
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .pill-list span {
+      font-size: 0.8rem;
+      padding: 6px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(7, 28, 25, 0.95);
+      border: 1px solid rgba(122, 210, 195, 0.4);
+      color: var(--muted);
+    }
+
+    .lead {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.9fr);
+      gap: 24px;
+      align-items: center;
+    }
+
+    .lead-box {
+      border-radius: var(--radius-xl);
+      background: radial-gradient(circle at top left, #031513, #041f1c 50%, #020908 100%);
+      padding: 18px 18px 20px;
+      border: 1px solid rgba(91, 210, 196, 0.6);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 1);
+    }
+
+    .lead-box h3 {
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .lead-box p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .lead-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .lead-form input {
+      flex: 1;
+      min-width: 160px;
+      padding: 10px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(100, 207, 190, 0.7);
+      font-size: 0.9rem;
+      outline: none;
+      background: rgba(3, 17, 15, 0.98);
+      color: var(--ink);
+    }
+
+    .lead-form input::placeholder {
+      color: rgba(144, 177, 167, 0.9);
+    }
+
+    .lead-form input:focus {
+      border-color: #40d3f5;
+      box-shadow: 0 0 0 1px rgba(64, 211, 245, 0.4);
+    }
+
+    .lead-note {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .price-box {
+      border-radius: var(--radius-xl);
+      background: radial-gradient(circle at top left, #031513 0, #041915 50%, #020807 100%);
+      border: 1px solid rgba(122, 210, 195, 0.6);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 1);
+      padding: 18px 18px 20px;
+      max-width: 360px;
+    }
+
+    .price-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+/* togli il limite di larghezza dentro la griglia */
+.price-grid .price-box {
+  max-width: none;
+}
+
+.price-box.featured {
+  border-color: #40d3f5;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 1);
+}
+
+/* responsive */
+@media (max-width: 880px) {
+  .price-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+
+    .price-title {
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .price-main {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .price-main span:first-child {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--accent-strong);
+    }
+
+    .price-main span:last-child {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .price-list {
+      margin: 10px 0 14px;
+      padding-left: 18px;
+    }
+
+    .price-list li {
+      font-size: 0.83rem;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .price-guarantee {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    .final-cta {
+      text-align: center;
+      padding: 40px 0 10px;
+    }
+
+    .final-cta h2 {
+      font-size: 1.6rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 6px;
+    }
+
+    .final-cta p {
+      font-size: 0.93rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .final-cta .btn-primary {
+      padding-inline: 24px;
+    }
+    .big-image-section {
+  text-align: center;
+  padding: 30px 0 10px;
+}
+
+.big-image {
+  width: 100%;
+  max-width: 980px;         /* grande ma non enorme */
+  border-radius: 22px;
+  object-fit: cover;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.9);
+  border: 1px solid rgba(120,210,195,0.35);
+}
+
+
+    footer {
+      padding-top: 18px;
+      font-size: 0.75rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      border-top: 1px solid rgba(54, 117, 104, 0.7);
+      margin-top: 24px;
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    .section-center {
+  text-align: center;
+}
+
+.section-center .section-label,
+.section-center .section-title,
+.section-center .section-sub {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-center .social-proof {
+  justify-content: center;
+}
+
+.section-center .pill-list {
+  justify-content: center;
+}
+
+    /* ANIMAZIONI SCROLL  -------------------- */
+
+    .reveal {
+      opacity: 0;
+      transform: translate3d(0, 30px, 0);
+      transition:
+        opacity 480ms var(--transition-fast),
+        transform 480ms var(--transition-fast);
+      will-change: opacity, transform;
+    }
+
+    .reveal.from-left {
+      transform: translate3d(-40px, 30px, 0);
+    }
+
+    .reveal.from-right {
+      transform: translate3d(40px, 30px, 0);
+    }
+
+    .reveal.in-view {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal,
+      .reveal.from-left,
+      .reveal.from-right {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 880px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-visual-wrap {
+        order: -1;
+      }
+      .lead {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .shell {
+        padding-inline: 16px;
+      }
+      header {
+        padding-top: 6px;
+      }
+      .hero {
+        padding-top: 26px;
+      }
+      .grid-3 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .steps {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-cta-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .hero-cta-row .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    .real-life {
+  margin-top: 40px;
+  padding: 20px 0;
+}
+
+.real-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.real-item img {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  border-radius: 20px;
+  border: 1px solid rgba(122,210,195,0.25);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.9);
+}
+
+@media (max-width: 720px) {
+  .real-grid {
+    grid-template-columns: minmax(0,1fr);
+  }
+  .real-item img {
+    height: 260px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="shell">
+      <header>
+        <div class="logo reveal from-left">
+          <div class="logo-mark">
+            <div class="logo-leaf"></div>
+          </div>
+          <div class="logo-text">·EcoGrow·</div>
+        </div>
+        <div class="pill reveal from-right">Tecnología + naturaleza, sin fricción</div>
+      </header>
+
+      <main>
+        <!-- BLOQUE DE DOLOR (CENTRADO Y ARRIBA) -->
+<section class="pain-block reveal">
+  <p>
+    <br><br>
+    <strong>TUS PLANTAS SON <span class="pain-highlight">FEAS</span> O INCLUSO SE <span class="pain-highlight">MUEREN</span>? <br>
+    En tu casa no hay suficiente luz? Tus horarios hacen imposible el cuidado de tus valiosas plantas? <br>
+    <br><span class="pain-highlight">NO ES TU CULPA!</span>
+  </p>
+</section>
+        <!-- HERO -->
+<section class="hero">
+  <!-- COLONNA SINISTRA: SOLUZIONE -->
+  <div class="reveal from-left">
+    <div class="hero-eyebrow">
+      <div class="hero-dot"><div class="hero-dot-inner"></div></div>
+      <span>Huerto inteligente para interiores</span>
+    </div>
+
+    <h1 class="hero-title">
+      EcoGrow <span>automatiza</span> luz, agua y nutrientes con <span>IA</span> para que tengas plantas
+      <span>vivas</span>, <span>sanas</span> y listas para <span>cosechar</span>.
+    </h1>
+
+    <p class="hero-subtitle">
+      Cultiva en casa sin preocuparte de riegos, luz ni horarios. Tú eliges qué plantar; EcoGrow hace el resto.
+    </p>
+
+    <div class="hero-cta-row">
+      <a href="#precio" class="btn btn-primary">Probar EcoGrow</a>
+      <a href="#como-funciona" class="btn btn-ghost">Ver cómo funciona — 30 seg.</a>
+    </div>
+    <p class="hero-hint">
+      Sin instalación complicada. Sin herramientas. Sin líos.
+    </p>
+  </div>
+
+    <!-- COLONNA DESTRA: PROBLEMA PICCOLO + VIDEO -->
+    <div class="hero-visual-wrap reveal from-right">
+
+      <div class="hero-card">
+        <div class="hero-tag">
+          <span>🌙 Sesión nocturna</span><span>Lechugas · Kale · Aromáticas</span>
+        </div>
+          <div class="hero-device">
+            <video class="device-video" controls autoplay muted loop playsinline>
+              <source src="videos/ecogrow-demo.mp4" type="video/mp4" />
+              Tu navegador no soporta video HTML5.
+            </video>
+          </div>
+        <div class="hero-badge-row">
+          <div class="badge-group">
+            <div class="mini-pill">89% usuarios eran principiantes</div>
+            <div class="mini-pill">2 minutos a la semana</div>
+          </div>
+          <span>Impulsado por IA</span>
+        </div>
+      </div>
+    </div>
+  </section>
+        <!-- SOCIAL PROOF -->
+        <section class="section-center">
+          <div class="section-label reveal from-left">Confianza</div>
+          <div class="social-proof reveal from-right">
+            <div>
+              <span class="social-highlight">Miles de plantas cultivadas</span> en pisos, estudios y oficinas.
+            </div>
+            <div class="quote">
+              “Por fin un huerto smart que no parece un gadget. Es bonito, automático y funciona.”
+              <br>— Marta R., Barcelona
+            </div>
+          </div>
+        </section>
+
+        <!-- BENEFICIOS -->
+        <section>
+          <div class="section-label reveal from-left">Por qué EcoGrow</div>
+          <h2 class="section-title reveal from-left">Design elegante.</h2>
+          <p class="section-sub reveal from-left">
+            EcoGrow combina diseño minimalista, automatización total e inteligencia artificial para que cultivar en casa sea tan simple como encender una lámpara.
+          </p>
+
+<div class="grid-3">
+  <!-- CARD 1 -->
+  <div class="card reveal from-left">
+    <h3>Automatización total</h3>
+    <p>
+      La app ajusta luz, agua y nutrientes en tiempo real. Sin calendarios, sin alarmas, sin dudas.
+    </p>
+    <img src="img/auto.png" alt="Automatización EcoGrow" class="card-img">
+  </div>
+
+  <!-- CARD 2 -->
+  <div class="card reveal">
+    <h3>Diseño que viste tu salón</h3>
+    <p>
+      Líneas limpias, materiales minimalistas y un formato que encaja en el salón, no solo en la cocina.
+    </p>
+    <img src="img/diseno.png" alt="Diseño EcoGrow" class="card-img">
+  </div>
+
+  <!-- CARD 3 -->
+  <div class="card reveal from-right">
+    <h3>Cosechas de verdad</h3>
+    <p>
+      Albahaca, lechugas, picantes, aromáticas. Cosechas continuas, temporada tras temporada, sin tierra.
+    </p>
+    <img src="img/cosecha.png" alt="Cosechas EcoGrow" class="card-img">
+  </div>
+</div>
+
+
+        <!-- CÓMO FUNCIONA -->
+        <section id="como-funciona" >
+          <div class="section-label reveal from-left">Cómo funciona</div>
+          <h2 class="section-title reveal from-left">Tres pasos. El resto lo hace la IA.</h2>
+          <p class="section-sub reveal from-left">
+            EcoGrow convierte el cultivo en casa en un proceso guiado. Tú decides qué plantar, la tecnología se encarga del cómo.
+          </p>
+
+          <div class="steps">
+            <div class="step reveal from-left">
+              <div class="step-index">1</div>
+              <h3>Llena el depósito</h3>
+              <p>
+                Añade agua y, si quieres, los nutrientes incluidos. Tardas menos que en hacer un café.
+              </p>
+            </div>
+            <div class="step reveal">
+              <div class="step-index">2</div>
+              <h3>Elige la planta en la app</h3>
+              <p>
+                Selecciona lo que quieres cultivar y EcoGrow ajusta luz, ciclos y riego automáticamente.
+              </p>
+            </div>
+            <div class="step reveal from-right">
+              <div class="step-index">3</div>
+              <h3>Cosecha cada semana</h3>
+              <p>
+                Recoge lo que necesitas, cuando lo necesitas. Siempre fresco, a unos pasos de tu sofá.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- PARA QUIÉN ES -->
+        <section class="section-center">
+          <div class="section-label reveal from-left">Para quién</div>
+          <h2 class="section-title reveal from-left">Pensado para gente con poco tiempo.</h2>
+          <p class="section-sub reveal from-left">
+            EcoGrow está diseñado para quienes quieren vivir mejor sin sumar tareas a su día.
+          </p>
+
+          <div class="pill-list reveal from-right">
+            <span>Profesionales entre 25 y 45 años</span>
+            <span>Amantes del diseño y del orden</span>
+            <span>Personas que viajan pero quieren verde en casa</span>
+            <span>Foodies que valoran el sabor, no el packaging</span>
+            <span>Quien ama la tecnología que simplifica, no complica</span>
+          </div>
+        </section>
+
+        <!-- IMAGEN GRANDE AL FINAL DE PARA QUIÉN -->
+<!-- IMÁGENES "VIDA REAL" -->
+<section class="real-life">
+  <div class="real-grid">
+    <div class="real-item reveal from-left">
+      <img src="img/coltivando1.jpg" alt="Pareja usando EcoGrow">
+    </div>
+
+    <div class="real-item reveal from-right">
+      <img src="img/coltivando2.png" alt="Familia con huerto EcoGrow">
+    </div>
+  </div>
+</section>
+
+
+
+        <!-- LEAD MAGNET / GUÍA -->
+        <section>
+          <div class="lead">
+            <div class="reveal from-left">
+              <div class="section-label">Verlo antes de comprar</div>
+              <h2 class="section-title">Descarga la guía visual gratuita.</h2>
+              <p class="section-sub">
+                10 páginas con ejemplos reales de cultivos, configuraciones de luz y trucos de la IA para sacar el máximo partido a EcoGrow en pisos pequeños.
+              </p>
+            </div>
+            <div class="lead-box reveal from-right">
+              <h3>Recibe la guía “Tu primer huerto inteligente”.</h3>
+              <p>
+                Deja tu correo y te enviamos la guía con el recorrido completo: desde la caja hasta tu primera cosecha.
+              </p>
+              <form class="lead-form">
+                <input type="email" placeholder="Tu mejor correo" required />
+                <button type="submit" class="btn btn-primary">Descargar guía</button>
+              </form>
+              <p class="lead-note">
+                Sin spam. Solo contenido útil sobre cultivo indoor, diseño y tecnología aplicada a tu casa.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- PRECIO -->
+        <section id="precio">
+  <div class="section-label reveal from-left">Oferta</div>
+  <h2 class="section-title reveal from-left">Elige el EcoGrow que va contigo.</h2>
+  <p class="section-sub reveal from-left">
+    Todos los kits incluyen app con IA y soporte por chat. Solo cambia el tamaño de tu huerto y las cápsulas iniciales.
+  </p>
+
+  <div class="price-grid">
+    <!-- PLAN 1: STARTER -->
+    <div class="price-box reveal from-left">
+      <div class="price-title">EcoGrow Starter</div>
+      <div class="price-main">
+        <span>169€</span>
+        <span>Ideal para empezar</span>
+      </div>
+      <ul class="price-list">
+        <li>Unidad EcoGrow para 4–6 plantas</li>
+        <li>App con automatización por IA</li>
+        <li>Pack inicial de 3 cápsulas de semillas</li>
+        <li>Soporte por chat básico</li>
+      </ul>
+      <a href="#" class="btn btn-primary" style="width:100%;justify-content:center;">Elegir Starter</a>
+      <div class="price-guarantee">
+        14 días para probarlo en casa. Si no te convence, te devolvemos el dinero.
+      </div>
+    </div>
+
+    <!-- PLAN 2: SMART KIT (DESTACADO) -->
+    <div class="price-box featured reveal">
+      <div class="price-title">EcoGrow Smart Kit</div>
+      <div class="price-main">
+        <span>199€</span>
+        <span>El más vendido · App incluida</span>
+      </div>
+      <ul class="price-list">
+        <li>Unidad EcoGrow de diseño minimalista</li>
+        <li>App con automatización por IA y recetas de cultivo</li>
+        <li>Pack inicial de 6 cápsulas de semillas variadas</li>
+        <li>Soporte por chat con especialistas en cultivo indoor</li>
+      </ul>
+      <a href="#" class="btn btn-primary" style="width:100%;justify-content:center;">Elegir Smart Kit</a>
+      <div class="price-guarantee">
+        Garantía 14 días: pruébalo sin riesgos. Si no encaja contigo o con tu casa, te devolvemos el dinero.
+      </div>
+    </div>
+
+    <!-- PLAN 3: FAMILY -->
+    <div class="price-box reveal from-right">
+      <div class="price-title">EcoGrow Family</div>
+      <div class="price-main">
+        <span>249€</span>
+        <span>Para familias y foodies</span>
+      </div>
+      <ul class="price-list">
+        <li>Unidad EcoGrow con capacidad ampliada</li>
+        <li>App con perfiles para varios cultivos</li>
+        <li>Pack inicial de 10 cápsulas de semillas</li>
+        <li>Soporte prioritario por chat</li>
+      </ul>
+      <a href="#" class="btn btn-primary" style="width:100%;justify-content:center;">Elegir Family</a>
+      <div class="price-guarantee">
+        También con garantía de 14 días. Pruébalo con tu familia sin compromiso.
+      </div>
+    </div>
+  </div>
+</section>
+
+
+        <!-- CTA FINAL -->
+        <section class="final-cta reveal">
+          <h2>La naturaleza, pero inteligente.</h2>
+          <p>
+            Empieza hoy. EcoGrow convierte tu salón en el lugar más fresco de la casa, literalmente.
+          </p>
+          <a href="#precio" class="btn btn-primary">Probar EcoGrow</a>
+        </section>
+      </main>
+
+      <footer>
+        <div>© EcoGrow. Todos los derechos reservados.</div>
+        <div>
+          <a href="#">Política de privacidad</a> ·
+          <a href="#">Términos de uso</a> ·
+          <a href="#">Preferencias de cookies</a>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+<script>
+  // Animazioni on-scroll con IntersectionObserver (ripetibili)
+  const reveals = document.querySelectorAll('.reveal');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        } else {
+          // quando esce, togliamo la classe così può ri-animarsi
+          entry.target.classList.remove('in-view');
+        }
+      });
+    },
+    {
+      threshold: 0.15
+    }
+  );
+
+  reveals.forEach((el) => observer.observe(el));
+</script>
+</body>
+</html>
