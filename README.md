@@ -8,3 +8,5 @@ HTML, CSS, JS
 
 ## Run locally
 Open `vendingpage.html` in the browser
+
+LinkedIn profile http://www.linkedin.com/in/ian-perri
